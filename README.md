@@ -5,9 +5,6 @@
 Celem tego zadania jest stworzenie kalkulatora, który będzie potrafił wykonywać podstawowe operacje matematyczne. Do
 tego celu użyjemy narzędzia ANTLR, które pozwala na generowanie lexerów i parserów na podstawie zdefiniowanej gramatyki.
 
-Rozumiem, że chcesz bardziej szczegółowego opisu kroku pierwszego, który dotyczy zrozumienia pojęć Lexer i Parser. Oto
-bardziej szczegółowy opis:
-
 ### Krok 1: Zrozumienie pojęć Lexer i Parser
 
 #### Lexer
