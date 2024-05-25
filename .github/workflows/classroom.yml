@@ -1,0 +1,90 @@
+name: Autograding Tests
+'on':
+- workflow_dispatch
+- repository_dispatch
+permissions:
+  checks: write
+  actions: read
+  contents: read
+jobs:
+  run-autograding-tests:
+    runs-on: ubuntu-latest
+    if: github.actor != 'github-classroom[bot]'
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    - name: testNo
+      id: testno
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: testNo
+        setup-command: ''
+        command: gradle test --tests org.example.DetailsExtractorTest.testNo
+        timeout: 10
+        max-score: 15
+    - name: testVol
+      id: testvol
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: testVol
+        setup-command: ''
+        command: gradle test --tests org.example.DetailsExtractorTest.testVol
+        timeout: 10
+        max-score: 15
+    - name: testPagesInRange
+      id: testpagesinrange
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: testPagesInRange
+        setup-command: ''
+        command: gradle test --tests org.example.DetailsExtractorTest.testPagesInRange
+        timeout: 10
+        max-score: 14
+    - name: testPagesAsSize
+      id: testpagesassize
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: testPagesAsSize
+        setup-command: ''
+        command: gradle test --tests org.example.DetailsExtractorTest.testPagesAsSize
+        timeout: 10
+        max-score: 14
+    - name: testPublisherLocation
+      id: testpublisherlocation
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: testPublisherLocation
+        setup-command: ''
+        command: gradle test --tests org.example.DetailsExtractorTest.testPublisherLocation
+        timeout: 10
+        max-score: 14
+    - name: testPublisherYear
+      id: testpublisheryear
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: testPublisherYear
+        setup-command: ''
+        command: gradle test --tests org.example.DetailsExtractorTest.testPublisherYear
+        timeout: 10
+        max-score: 14
+    - name: testPublisherName
+      id: testpublishername
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: testPublisherName
+        setup-command: ''
+        command: gradle test --tests org.example.DetailsExtractorTest.testPublisherName
+        timeout: 10
+        max-score: 14
+    - name: Autograding Reporter
+      uses: classroom-resources/autograding-grading-reporter@v1
+      env:
+        TESTNO_RESULTS: "${{steps.testno.outputs.result}}"
+        TESTVOL_RESULTS: "${{steps.testvol.outputs.result}}"
+        TESTPAGESINRANGE_RESULTS: "${{steps.testpagesinrange.outputs.result}}"
+        TESTPAGESASSIZE_RESULTS: "${{steps.testpagesassize.outputs.result}}"
+        TESTPUBLISHERLOCATION_RESULTS: "${{steps.testpublisherlocation.outputs.result}}"
+        TESTPUBLISHERYEAR_RESULTS: "${{steps.testpublisheryear.outputs.result}}"
+        TESTPUBLISHERNAME_RESULTS: "${{steps.testpublishername.outputs.result}}"
+      with:
+        runners: testno,testvol,testpagesinrange,testpagesassize,testpublisherlocation,testpublisheryear,testpublishername
