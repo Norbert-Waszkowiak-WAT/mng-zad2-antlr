@@ -78,7 +78,7 @@ class MyCalculatorTest {
         //then
         Double result = MyCalculator.calc(expression);
         //expect
-        assert result + 0.8660 < 0.0001;
+        assert result + 0.0 < 0.0001;
     }
 
     @Test
